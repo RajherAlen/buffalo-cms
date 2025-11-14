@@ -3,7 +3,6 @@ import { Field } from 'payload'
 export const sectionFields: Field = {
   name: 'section',
   type: 'select',
-  defaultValue: 'default',
   options: [
     {
       label: 'Default',
