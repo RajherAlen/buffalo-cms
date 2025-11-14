@@ -76,6 +76,7 @@ export const enum_pages_blocks_custom_block_contact_links_link_variant = pgEnum(
 export const enum_pages_blocks_custom_block_section = pgEnum(
   'enum_pages_blocks_custom_block_section',
   [
+    'default',
     'custom',
     'signature',
     'planning',
@@ -163,6 +164,7 @@ export const enum__pages_v_blocks_custom_block_contact_links_link_variant = pgEn
 export const enum__pages_v_blocks_custom_block_section = pgEnum(
   'enum__pages_v_blocks_custom_block_section',
   [
+    'default',
     'custom',
     'signature',
     'planning',
