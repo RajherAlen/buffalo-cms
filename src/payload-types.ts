@@ -1452,7 +1452,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        customBlock?: T | CustomBlockSelect<T>;
+        customBlock?: T | CustomBlockSelect;
       };
   meta?:
     | T
