@@ -4,9 +4,11 @@ import React, { useEffect } from 'react'
 
 import type { Page } from '@/payload-types'
 
-import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import Link from 'next/link'
+import { buttonVariants } from '@/components/ui/button'
+import Image from 'next/image'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const { setHeaderTheme } = useHeaderTheme()
@@ -16,31 +18,50 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   })
 
   return (
-    <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
-      data-theme="dark"
-    >
+    <div className="relative flex items-center justify-center flex-col overflow-hidden p-4">
+      <Image
+        src="/img/left-rose-icon.png"
+        alt="Floral"
+        width={411}
+        height={628}
+        className="-left-52 rotate-[30deg] scale-75 lg:scale-100 lg:rotate-0 absolute top-1/2 -translate-y-1/2 lg:-left-11 object-contain z-0"
+      />
+      <Image
+        src="/img/right-rose-icon.png"
+        alt="Floral"
+        width={411}
+        height={628}
+        className="-right-52 -rotate-[30deg] scale-75 lg:scale-100 lg:rotate-0 absolute top-1/2 -translate-y-1/2 lg:-right-11 object-contain z-0"
+      />
       <div className="container mb-8 z-10 relative flex items-center justify-center">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+        <div className="max-w-[746px] md:text-center space-y-7">
+          {richText && <RichText data={richText} enableGutter={false} />}
+
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
+            <div className="flex flex-col sm:flex-row md:justify-center gap-4 max-w-[398px] m-auto">
               {links.map(({ link }, i) => {
+                const { url, label, appearance } = link
+
                 return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
+                  <Link
+                    href={url || ''}
+                    className={buttonVariants({ variant: appearance, className: 'w-full' })}
+                    key={i}
+                  >
+                    {label}
+                  </Link>
                 )
               })}
-            </ul>
+            </div>
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
-      </div>
+
+      {media && typeof media === 'object' && (
+        <div className="max-h-[660px] max-w-[1320px] select-none mt-10 p-10">
+          <Media fill imgClassName="" priority resource={media} />
+        </div>
+      )}
     </div>
   )
 }

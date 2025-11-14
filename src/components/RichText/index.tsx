@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import {
   DefaultNodeTypes,
@@ -12,7 +13,6 @@ import {
 } from '@payloadcms/richtext-lexical/react'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
-
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
@@ -21,6 +21,7 @@ import type {
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { cn } from '@/utilities/ui'
+import React from 'react'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -35,12 +36,52 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   return relationTo === 'posts' ? `/posts/${slug}` : `/${slug}`
 }
 
-const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
+// ✨ jsxConverters now only requires defaultConverters + paragraphClassName as extra
+const jsxConverters = (
+  defaultConverters: ReturnType<JSXConvertersFunction<NodeTypes>>,
+  paragraphClassName?: string,
+) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  heading: ({ node, nodesToJSX }: any) => {
+    const Tag = node.tag as keyof JSX.IntrinsicElements
+    const children = node.children.map((child: any, index: number) =>
+      child.type === 'lineBreak' ? (
+        <br key={index} />
+      ) : (
+        <React.Fragment key={index}>{nodesToJSX({ nodes: [child] })}</React.Fragment>
+      ),
+    )
+
+    if (node.tag === 'h2') {
+      return (
+        <Tag className="!text-[36px] leading-[44px] xl:!text-[44px] xl:leading-[52px] !mb-0 font-faustina font-normal">
+          {children}
+        </Tag>
+      )
+    }
+    if (node.tag === 'h1') {
+      return (
+        <Tag className="text-4xl leading-[44px] xl:text-[56px] xl:leading-[64px] font-semibold text-text-primary font-faustina-italic">
+          {children}
+        </Tag>
+      )
+    }
+    return <Tag>{children}</Tag>
+  },
+  paragraph: ({ node, nodesToJSX }: any) => {
+    const children = node.children.map((child: any, index: number) =>
+      child.type === 'lineBreak' ? (
+        <br key={index} />
+      ) : (
+        <React.Fragment key={index}>{nodesToJSX({ nodes: [child] })}</React.Fragment>
+      ),
+    )
+    return <p className={cn('m-0', paragraphClassName)}>{children}</p>
+  },
   blocks: {
-    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
-    mediaBlock: ({ node }) => (
+    banner: ({ node }: any) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    mediaBlock: ({ node }: any) => (
       <MediaBlock
         className="col-start-1 col-span-3"
         imgClassName="m-0"
@@ -50,8 +91,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         disableInnerContainer={true}
       />
     ),
-    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
-    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    code: ({ node }: any) => <CodeBlock className="col-start-2" {...node.fields} />,
+    cta: ({ node }: any) => <CallToActionBlock {...node.fields} />,
   },
 })
 
@@ -59,19 +100,27 @@ type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
+  paragraphClassName?: string
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, paragraphClassName, ...rest } = props
+
+  // ✅ Wrapper to inject paragraphClassName dynamically
+  const convertersWrapper = ({
+    defaultConverters,
+  }: {
+    defaultConverters: ReturnType<JSXConvertersFunction<DefaultNodeTypes>>
+  }) => jsxConverters(defaultConverters, paragraphClassName)
+
   return (
     <ConvertRichText
-      converters={jsxConverters}
+      converters={convertersWrapper}
       className={cn(
         'payload-richtext',
         {
-          container: enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md dark:prose-invert': enableProse,
+          'prose md:prose-md max-w-none': enableProse,
         },
         className,
       )}

@@ -199,7 +199,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | CustomBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -780,6 +780,372 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Custom Block".
+ */
+export interface CustomBlock {
+  section:
+    | 'default'
+    | 'custom'
+    | 'signature'
+    | 'planning'
+    | 'burial-options'
+    | 'burial-options-list'
+    | 'stats'
+    | 'guidance-and-comfort'
+    | 'grief-support'
+    | 'resources'
+    | 'news'
+    | 'contact'
+    | 'benefit'
+    | 'testimonial'
+    | 'planning-process'
+    | 'faq';
+  columns?:
+    | {
+        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableLink?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  signatureName?: string | null;
+  signatureTitle?: string | null;
+  signatureImage?: (number | null) | Media;
+  planningLayout?: ('default' | 'floral') | null;
+  planningTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  description?: string | null;
+  planningCards?:
+    | {
+        heading: string;
+        subheading: string;
+        description: string;
+        link?: string | null;
+        buttonLabel?: string | null;
+        buttonVariant?: ('primary' | 'primary-outline' | 'default' | 'outline') | null;
+        badges?:
+          | {
+              badge: string;
+              id?: string | null;
+            }[]
+          | null;
+        cardBackground?: ('default' | 'floral') | null;
+        id?: string | null;
+      }[]
+    | null;
+  sectionTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  burialLayout?: ('vertical' | 'horizontal') | null;
+  burialDescription?: string | null;
+  image?: (number | null) | Media;
+  burialOptions?:
+    | {
+        title: string;
+        description?: string | null;
+        buttonText?: string | null;
+        'burial-link'?: string | null;
+        burialImage?: (number | null) | Media;
+        burialBadges?:
+          | {
+              title: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  burialOptionsList?:
+    | {
+        title: string;
+        category?: string | null;
+        image: number | Media;
+        description?: string | null;
+        buttonLabel?: string | null;
+        buttonLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  statsTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  statsDescription?: string | null;
+  statsColumn?:
+    | {
+        statsValue: string;
+        statsLabel: string;
+        id?: string | null;
+      }[]
+    | null;
+  badges?:
+    | {
+        badgeLabel?: string | null;
+        badgeLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  griefTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  griefSubtitle?: string | null;
+  supportCards?:
+    | {
+        supportTitle: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        supportDescription: string;
+        supportButtonText?: string | null;
+        supportLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  badgeText?: string | null;
+  guideTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  guideDescription?: string | null;
+  resourceTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  resourcesLinks?:
+    | {
+        resourceTitle: string;
+        resourceUrl: string;
+        resourceDescription?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  contactDescription?: string | null;
+  contactLinks?:
+    | {
+        linkTitle?: string | null;
+        linkUrl?: string | null;
+        linkVariant?: ('default' | 'outline') | null;
+        id?: string | null;
+      }[]
+    | null;
+  benefitTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  benefitLayout?: ('vertical' | 'horizontal') | null;
+  benefitDescription?: string | null;
+  benefits?:
+    | {
+        heading: string;
+        subheading: string;
+        id?: string | null;
+      }[]
+    | null;
+  testimonialText?: string | null;
+  testimonialAuthor?: string | null;
+  testimonialPlace?: string | null;
+  planningProcessTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  planningProcessDescription?: string | null;
+  planningProcessCards?:
+    | {
+        heading: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  faqRichTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  faqs?:
+    | {
+        faqQuestion?: string | null;
+        faqAnswer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'customBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1086,6 +1452,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        customBlock?: T | CustomBlockSelect<T>;
       };
   meta?:
     | T
@@ -1184,6 +1551,159 @@ export interface FormBlockSelect<T extends boolean = true> {
   introContent?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Custom Block_select".
+ */
+export interface CustomBlockSelect {
+  section?: boolean;
+  columns?:
+    | boolean
+    | {
+        size?: boolean;
+        richText?: boolean;
+        enableLink?: boolean;
+        id?: boolean;
+      };
+  heading?: boolean;
+  body?: boolean;
+  signatureName?: boolean;
+  signatureTitle?: boolean;
+  signatureImage?: boolean;
+  planningLayout?: boolean;
+  planningTitle?: boolean;
+  description?: boolean;
+  planningCards?:
+    | boolean
+    | {
+        heading?: boolean;
+        subheading?: boolean;
+        description?: boolean;
+        link?: boolean;
+        buttonLabel?: boolean;
+        buttonVariant?: boolean;
+        badges?:
+          | boolean
+          | {
+              badge?: boolean;
+              id?: boolean;
+            };
+        cardBackground?: boolean;
+        id?: boolean;
+      };
+  sectionTitle?: boolean;
+  burialLayout?: boolean;
+  burialDescription?: boolean;
+  image?: boolean;
+  burialOptions?:
+    | boolean
+    | {
+        title?: boolean;
+        description?: boolean;
+        buttonText?: boolean;
+        'burial-link'?: boolean;
+        burialImage?: boolean;
+        burialBadges?:
+          | boolean
+          | {
+              title?: boolean;
+              id?: boolean;
+            };
+        id?: boolean;
+      };
+  burialOptionsList?:
+    | boolean
+    | {
+        title?: boolean;
+        category?: boolean;
+        image?: boolean;
+        description?: boolean;
+        buttonLabel?: boolean;
+        buttonLink?: boolean;
+        id?: boolean;
+      };
+  statsTitle?: boolean;
+  statsDescription?: boolean;
+  statsColumn?:
+    | boolean
+    | {
+        statsValue?: boolean;
+        statsLabel?: boolean;
+        id?: boolean;
+      };
+  badges?:
+    | boolean
+    | {
+        badgeLabel?: boolean;
+        badgeLink?: boolean;
+        id?: boolean;
+      };
+  griefTitle?: boolean;
+  griefSubtitle?: boolean;
+  supportCards?:
+    | boolean
+    | {
+        supportTitle?: boolean;
+        supportDescription?: boolean;
+        supportButtonText?: boolean;
+        supportLink?: boolean;
+        id?: boolean;
+      };
+  badgeText?: boolean;
+  guideTitle?: boolean;
+  guideDescription?: boolean;
+  resourceTitle?: boolean;
+  resourcesLinks?:
+    | boolean
+    | {
+        resourceTitle?: boolean;
+        resourceUrl?: boolean;
+        resourceDescription?: boolean;
+        id?: boolean;
+      };
+  contactTitle?: boolean;
+  contactDescription?: boolean;
+  contactLinks?:
+    | boolean
+    | {
+        linkTitle?: boolean;
+        linkUrl?: boolean;
+        linkVariant?: boolean;
+        id?: boolean;
+      };
+  benefitTitle?: boolean;
+  benefitLayout?: boolean;
+  benefitDescription?: boolean;
+  benefits?:
+    | boolean
+    | {
+        heading?: boolean;
+        subheading?: boolean;
+        id?: boolean;
+      };
+  testimonialText?: boolean;
+  testimonialAuthor?: boolean;
+  testimonialPlace?: boolean;
+  planningProcessTitle?: boolean;
+  planningProcessDescription?: boolean;
+  planningProcessCards?:
+    | boolean
+    | {
+        heading?: boolean;
+        description?: boolean;
+        id?: boolean;
+      };
+  faqRichTitle?: boolean;
+  faqs?:
+    | boolean
+    | {
+        faqQuestion?: boolean;
+        faqAnswer?: boolean;
+        id?: boolean;
+      };
+  id?: boolean;
+  blockName?: boolean;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
