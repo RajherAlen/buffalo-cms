@@ -30,7 +30,7 @@ export default async function NewsBlock() {
                   className="w-full h-48 object-cover"
                 />
               )}
-              <div className="p-4">
+              <div className="p-4 tex-t">
                 <p className="text-sm text-gray-500">{item.location}</p>
                 <h3 className="text-xl font-semibold mt-1">{item.title}</h3>
                 <p className="text-sm text-gray-400 mt-2">
