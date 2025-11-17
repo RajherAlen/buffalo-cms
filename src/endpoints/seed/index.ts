@@ -219,30 +219,6 @@ export const seed = async ({
 
   await Promise.all([
     payload.updateGlobal({
-      slug: 'header',
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Posts',
-              url: '/posts',
-            },
-          },
-          {
-            link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
-              },
-            },
-          },
-        ],
-      },
-    }),
-    payload.updateGlobal({
       slug: 'footer',
       data: {
         navItems: [
