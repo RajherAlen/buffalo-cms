@@ -2154,26 +2154,19 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
+  navItems: {
+    label: string;
+    url?: string | null;
+    hasDropdown?: boolean | null;
+    dropdownItems?:
+      | {
           label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2214,14 +2207,15 @@ export interface HeaderSelect<T extends boolean = true> {
   navItems?:
     | T
     | {
-        link?:
+        label?: T;
+        url?: T;
+        hasDropdown?: T;
+        dropdownItems?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
               label?: T;
+              url?: T;
+              id?: T;
             };
         id?: T;
       };

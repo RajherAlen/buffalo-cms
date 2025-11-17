@@ -71,8 +71,9 @@ export const Accordion: React.FC<AccordionProps> = ({
               <X
                 className={cn(
                   'transition-transform duration-300',
-                  isOpen ? 'rotate-90' : 'rotate-0',
+                  isOpen ? 'rotate-90' : 'rotate-45',
                 )}
+                size={20}
               />
             </div>
 

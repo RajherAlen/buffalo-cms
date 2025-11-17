@@ -3,51 +3,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-type NavItem = {
+// ---------------- Types (compatible with Payload CMS) ----------------
+export type NavItem = {
   label: string
-  url?: string
-  children?: {
-    label: string
-    url: string
-  }[]
+  url?: string | null
+  hasDropdown?: boolean | null // accept null from CMS
+  dropdownItems?:
+    | {
+        label: string
+        url?: string | null
+      }[]
+    | null
 }
 
-const navList: NavItem[] = [
-  {
-    label: 'Planning',
-    children: [
-      { label: 'Pre-Planning', url: '/pre-planning' },
-      { label: 'Funeral Services', url: '/funeral-services' },
-      { label: 'Cremation Services', url: '/cremation-services' },
-      { label: 'Memorial Products', url: '/memorial-products' },
-    ],
-  },
-  {
-    label: 'Remembrance',
-    children: [
-      { label: 'Obituaries', url: '/obituaries' },
-      { label: 'Virtual Memorials', url: '/virtual-memorials' },
-      { label: 'Grief Support', url: '/grief-support' },
-    ],
-  },
-  {
-    label: 'About Us',
-    children: [
-      { label: 'Our Story', url: '/our-story' },
-      { label: 'Our Team', url: '/our-team' },
-      { label: 'Careers', url: '/careers' },
-      { label: 'Blog', url: '/blog' },
-    ],
-  },
-  {
-    label: 'Payments',
-    children: [{ label: 'Make a Payment', url: '/make-a-payment' }],
-  },
-  { label: 'FAQ', url: '/faq' },
-  { label: 'Contact', url: '/contact' },
-]
-
-// ---------------- NavLink Component ----------------
+// ---------------- NavLink ----------------
 const NavLink = ({
   href,
   children,
@@ -66,8 +35,7 @@ const NavLink = ({
   </Link>
 )
 
-// ---------------- Dropdown Component ----------------
-// Update Dropdown Props
+// ---------------- Dropdown ----------------
 type DropdownProps = {
   item: NavItem
   isOpen: boolean
@@ -75,9 +43,11 @@ type DropdownProps = {
   closeDropdown: () => void
 }
 
-// Update Dropdown Component
 const Dropdown = ({ item, isOpen, toggle, closeDropdown }: DropdownProps) => {
-  if (!item.children) return <NavLink href={item.url || '#'}>{item.label}</NavLink>
+  // No dropdown → simple link
+  if (!item.hasDropdown || !item.dropdownItems || item.dropdownItems.length === 0) {
+    return <NavLink href={item.url || '#'}>{item.label}</NavLink>
+  }
 
   return (
     <div className="relative">
@@ -99,12 +69,12 @@ const Dropdown = ({ item, isOpen, toggle, closeDropdown }: DropdownProps) => {
 
       <div
         className={`absolute left-0 top-full mt-2 w-48 bg-white shadow-lg rounded-md z-50 origin-top transition-all duration-300 ease-out transform
-                ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
+        ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
       >
         <ul className="p-1">
-          {item.children.map((child, idx) => (
+          {item.dropdownItems.map((child, idx) => (
             <li key={idx} className="px-2 py-1">
-              <NavLink href={child.url} onClick={closeDropdown}>
+              <NavLink href={child.url ?? '#'} onClick={closeDropdown}>
                 {child.label}
               </NavLink>
             </li>
@@ -115,12 +85,12 @@ const Dropdown = ({ item, isOpen, toggle, closeDropdown }: DropdownProps) => {
   )
 }
 
-// ---------------- HeaderNav Component ----------------
-export const HeaderNav = () => {
+export const HeaderNav = ({ navItems }: { navItems: NavItem[] }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const toggleDropdown = (index: number) => setOpenIndex(openIndex === index ? null : index)
+
   const closeDropdown = () => setOpenIndex(null)
 
   useEffect(() => {
@@ -139,7 +109,7 @@ export const HeaderNav = () => {
       ref={dropdownRef}
       className="gap-6 items-center text-gray-800 text-[16px] font-medium relative hidden lg:flex"
     >
-      {navList.map((item, i) => (
+      {navItems?.map((item, i) => (
         <Dropdown
           key={i}
           item={item}
