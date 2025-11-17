@@ -8,13 +8,13 @@ import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
+import { buttonVariants } from '@/components/ui/button'
 
 interface HeaderClientProps {
-  data: Header
+  data?: Header
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  /* Storing the value in a useState to avoid hydration errors */
+export const HeaderClient: React.FC<HeaderClientProps> = () => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
@@ -30,12 +30,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
+    <header className="container relative z-20">
+      <div className="py-8 flex justify-between items-center">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          <Logo loading="eager" priority="high" />
         </Link>
-        <HeaderNav data={data} />
+        <HeaderNav />
+
+        <Link href="locate-a-loved-one" className={buttonVariants({ variant: 'outline' })}>
+          Locate a Loved One
+        </Link>
       </div>
     </header>
   )

@@ -1,10 +1,13 @@
 import clsx from 'clsx'
+import Image from 'next/image'
 import React from 'react'
-
+import logoSrc from './logo.svg'
+import logoGreyScale from './logo-grayscale.svg'
 interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
+  isGrayScale?: boolean
 }
 
 export const Logo = (props: Props) => {
@@ -14,16 +17,13 @@ export const Logo = (props: Props) => {
   const priority = priorityFromProps || 'low'
 
   return (
-    /* eslint-disable @next/next/no-img-element */
-    <img
-      alt="Payload Logo"
-      width={193}
-      height={34}
+    <Image
+      src={props.isGrayScale ? logoGreyScale : logoSrc}
+      height={52}
+      alt="logo"
       loading={loading}
-      fetchPriority={priority}
-      decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      priority={priority === 'high'}
+      className={clsx('w-auto h-[52px]', className)}
     />
   )
 }
