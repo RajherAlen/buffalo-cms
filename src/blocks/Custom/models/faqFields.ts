@@ -21,6 +21,16 @@ const faqField = {
     type: 'text',
     required: false,
   },
+  faqType: {
+    name: 'faqType',
+    label: 'Type',
+    type: 'select',
+    options: [
+      { label: 'Services', value: 'services' },
+      { label: 'Burial', value: 'burial' },
+      { label: 'Grief', value: 'grief' },
+    ],
+  },
 }
 
 export const faqFields = {
@@ -36,6 +46,17 @@ export const faqFields = {
         InlineToolbarFeature(),
       ],
     }),
+    admin: { condition: isFAQSection },
+  },
+  faqLayout: {
+    name: 'faqLayout',
+    type: 'select',
+    defaultValue: 'block',
+    options: [
+      { label: 'Block', value: 'block' },
+      { label: 'FullPage', value: 'full-page' },
+    ],
+    required: false,
     admin: { condition: isFAQSection },
   },
   faqs: {
