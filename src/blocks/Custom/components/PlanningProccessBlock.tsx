@@ -19,7 +19,7 @@ export const PlanningProcessBlock: React.FC<PlanningProcessBlockProps> = ({
 }) => {
   return (
     <section className="max-w-[1320px] mx-auto py-20">
-      <div className="bg-background-light border border-primary-dark px-9 py-7">
+      <div className="bg-background-light border border-primary-dark px-9 py-7 rounded-lg">
         {planningProcessTitle && (
           <div className="mb-6  text-center">
             <RichText data={planningProcessTitle} className="!text-4xl font-faustina" />
