@@ -33,7 +33,7 @@ export const LowImpactHero: React.FC<LowImpactHeroType> = ({ children, richText 
         className="-right-52  scale-75 lg:scale-100 absolute -top-16 lg:-right-20 object-contain z-[-1]"
       />
       <div className="max-w-[48rem] text-center mx-auto">
-        {children || (richText && <RichText data={richText} enableGutter={false} />)}
+        {children || (richText && <RichText data={richText} enableGutter={false} paragraphClassName="text-sm text-brand-30" />)}
       </div>
     </div>
   )

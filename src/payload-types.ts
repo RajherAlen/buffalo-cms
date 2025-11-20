@@ -225,6 +225,7 @@ export interface Page {
 export interface Post {
   id: number;
   title: string;
+  publisher: string;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -252,7 +253,6 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (number | User)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -410,31 +410,6 @@ export interface Category {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  name?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -799,7 +774,8 @@ export interface CustomBlock {
     | 'benefit'
     | 'testimonial'
     | 'planning-process'
-    | 'faq';
+    | 'faq'
+    | 'iframe';
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -1142,9 +1118,41 @@ export interface CustomBlock {
         id?: string | null;
       }[]
     | null;
+  iframeTitle?: string | null;
+  /**
+   * Paste the URL to embed (e.g., YouTube or Google Maps)
+   */
+  iframeUrl?: string | null;
+  iframeWidth?: string | null;
+  iframeHeight?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'customBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1706,6 +1714,10 @@ export interface CustomBlockSelect {
         faqType?: boolean;
         id?: boolean;
       };
+  iframeTitle?: boolean;
+  iframeUrl?: boolean;
+  iframeWidth?: boolean;
+  iframeHeight?: boolean;
   id?: boolean;
   blockName?: boolean;
 }
@@ -1715,6 +1727,7 @@ export interface CustomBlockSelect {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  publisher?: T;
   heroImage?: T;
   content?: T;
   relatedPosts?: T;
@@ -1727,7 +1740,6 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
-  authors?: T;
   populatedAuthors?:
     | T
     | {

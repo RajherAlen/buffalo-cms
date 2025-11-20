@@ -15,6 +15,7 @@ import TestimonialBlock from './components/TestimonialBlock';
 import { PlanningProcessBlock } from './components/PlanningProccessBlock';
 import FAQBlock from './components/FAQBlock';
 import BurialOptionListBlock from './components/BurialOptionListBlock';
+import IframeBlock from './components/IframeBlock';
 
 
 const blockComponentMap: Record<BlockSection, React.ComponentType<any>> = {
@@ -31,7 +32,8 @@ const blockComponentMap: Record<BlockSection, React.ComponentType<any>> = {
     testimonial: TestimonialBlock,
     'planning-process': PlanningProcessBlock,
     faq: FAQBlock,
-    'burial-options-list': BurialOptionListBlock
+    'burial-options-list': BurialOptionListBlock,
+    iframe: IframeBlock
 };
 
 export const CustomBlock = (props: BaseBlockProps) => {

@@ -68,6 +68,10 @@ export const sectionFields: Field = {
       label: 'Faq',
       value: 'faq',
     },
+    {
+      label: 'Iframe',
+      value: 'iframe',
+    },
   ],
   required: true,
 }
