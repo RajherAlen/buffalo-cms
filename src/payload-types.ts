@@ -759,23 +759,24 @@ export interface Form {
  */
 export interface CustomBlock {
   section:
-    | 'default'
-    | 'custom'
-    | 'signature'
-    | 'planning'
+    | 'benefit'
     | 'burial-options'
     | 'burial-options-list'
-    | 'stats'
-    | 'guidance-and-comfort'
-    | 'grief-support'
-    | 'resources'
-    | 'news'
+    | 'cemetery-locations'
     | 'contact'
-    | 'benefit'
-    | 'testimonial'
-    | 'planning-process'
+    | 'custom'
+    | 'default'
     | 'faq'
-    | 'iframe';
+    | 'grief-support'
+    | 'iframe'
+    | 'news'
+    | 'planning'
+    | 'planning-process'
+    | 'guidance-and-comfort'
+    | 'resources'
+    | 'stats'
+    | 'testimonial'
+    | 'signature';
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -997,6 +998,7 @@ export interface CustomBlock {
     [k: string]: unknown;
   } | null;
   guideDescription?: string | null;
+  resourcesLayot?: ('default' | 'wrapped') | null;
   resourceTitle?: {
     root: {
       type: string;
@@ -1125,6 +1127,19 @@ export interface CustomBlock {
   iframeUrl?: string | null;
   iframeWidth?: string | null;
   iframeHeight?: string | null;
+  cemeteryLayout?: ('list' | 'preview') | null;
+  cemeteries?:
+    | {
+        cemeteryTitle: string;
+        cemeteryAddress: string;
+        cemeteryPhone?: string | null;
+        hoursWeekdays?: string | null;
+        hoursSaturday?: string | null;
+        detailsLink?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'customBlock';
@@ -1663,6 +1678,7 @@ export interface CustomBlockSelect {
   badgeText?: boolean;
   guideTitle?: boolean;
   guideDescription?: boolean;
+  resourcesLayot?: boolean;
   resourceTitle?: boolean;
   resourcesLinks?:
     | boolean
@@ -1718,6 +1734,19 @@ export interface CustomBlockSelect {
   iframeUrl?: boolean;
   iframeWidth?: boolean;
   iframeHeight?: boolean;
+  cemeteryLayout?: boolean;
+  cemeteries?:
+    | boolean
+    | {
+        cemeteryTitle?: boolean;
+        cemeteryAddress?: boolean;
+        cemeteryPhone?: boolean;
+        hoursWeekdays?: boolean;
+        hoursSaturday?: boolean;
+        detailsLink?: boolean;
+        image?: boolean;
+        id?: boolean;
+      };
   id?: boolean;
   blockName?: boolean;
 }

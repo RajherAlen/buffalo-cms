@@ -15,6 +15,7 @@ import { planningProcessFields } from './models/planningProccessFields'
 import { faqFields } from './models/faqFields'
 import { burialOptionsListFields } from './models/burialOptionsFields'
 import { iframeFields } from './models/iframeFields'
+import { cemeteryLocationsFields } from './models/cementeryLocationsFields'
 
 export const CustomBlock: Block = {
   slug: 'customBlock',
@@ -65,5 +66,8 @@ export const CustomBlock: Block = {
 
     // iframe
     ...Object.values(iframeFields),
+
+    // Cemetery Locations
+    ...Object.values(cemeteryLocationsFields),
   ],
 }

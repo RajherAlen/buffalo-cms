@@ -16,6 +16,7 @@ import { PlanningProcessBlock } from './components/PlanningProccessBlock';
 import FAQBlock from './components/FAQBlock';
 import BurialOptionListBlock from './components/BurialOptionListBlock';
 import IframeBlock from './components/IframeBlock';
+import CemeteryLocationsBlock from './components/CemeteryLocationsBlock ';
 
 
 const blockComponentMap: Record<BlockSection, React.ComponentType<any>> = {
@@ -33,7 +34,8 @@ const blockComponentMap: Record<BlockSection, React.ComponentType<any>> = {
     'planning-process': PlanningProcessBlock,
     faq: FAQBlock,
     'burial-options-list': BurialOptionListBlock,
-    iframe: IframeBlock
+    iframe: IframeBlock,
+    'cemetery-locations': CemeteryLocationsBlock,
 };
 
 export const CustomBlock = (props: BaseBlockProps) => {

@@ -26,7 +26,7 @@ const GuidanceAndComfortBlock = ({
     return (
         <section
             className={cn(
-                'relative overflow-hidden rounded-lg bg-primary-light p-9 xl:h-[548px] flex flex-col justify-between gap-10 md:gap-20 border border-secondary'
+                'relative overflow-hidden rounded-lg bg-background-light p-9 xl:h-[548px] flex flex-col justify-between gap-10 md:gap-20 border border-secondary'
             )}
         >
             {/* Text Content */}

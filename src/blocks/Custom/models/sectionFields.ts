@@ -5,20 +5,8 @@ export const sectionFields: Field = {
   type: 'select',
   options: [
     {
-      label: 'Default',
-      value: 'default',
-    },
-    {
-      label: 'Custom',
-      value: 'custom',
-    },
-    {
-      label: 'With Signature',
-      value: 'signature',
-    },
-    {
-      label: 'Planning',
-      value: 'planning',
+      label: 'Benefit',
+      value: 'benefit',
     },
     {
       label: 'Burial Options',
@@ -29,48 +17,65 @@ export const sectionFields: Field = {
       value: 'burial-options-list',
     },
     {
-      label: 'Statistics',
-      value: 'stats',
-    },
-    {
-      label: 'Guidance and Comfort',
-      value: 'guidance-and-comfort',
-    },
-    {
-      label: 'Grief Support',
-      value: 'grief-support',
-    },
-    {
-      label: 'Resources',
-      value: 'resources',
-    },
-    {
-      label: 'News',
-      value: 'news',
+      label: 'Cemetery Locations',
+      value: 'cemetery-locations',
     },
     {
       label: 'Contact',
       value: 'contact',
     },
     {
-      label: 'Benefit',
-      value: 'benefit',
+      label: 'Custom',
+      value: 'custom',
     },
     {
-      label: 'Testimonial',
-      value: 'testimonial',
-    },
-    {
-      label: 'Planning Process',
-      value: 'planning-process',
+      label: 'Default',
+      value: 'default',
     },
     {
       label: 'Faq',
       value: 'faq',
     },
     {
+      label: 'Grief Support',
+      value: 'grief-support',
+    },
+    {
       label: 'Iframe',
       value: 'iframe',
+    },
+    {
+      label: 'News',
+      value: 'news',
+    },
+    {
+      label: 'Planning',
+      value: 'planning',
+    },
+    {
+      label: 'Planning Process',
+      value: 'planning-process',
+    },
+    {
+      label: 'Promo / Guidance & Comfort',
+      value: 'guidance-and-comfort',
+    },
+
+    {
+      label: 'Resources',
+      value: 'resources',
+    },
+    {
+      label: 'Statistics',
+      value: 'stats',
+    },
+    {
+      label: 'Testimonial',
+      value: 'testimonial',
+    },
+    {
+      label: 'With Signature',
+      value: 'signature',
     },
   ],
   required: true,

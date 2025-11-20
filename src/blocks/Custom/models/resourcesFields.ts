@@ -6,6 +6,13 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+const showOnDefault = (_data: any, _siblingData: any, parentData: any) => {
+  return (
+    parentData?.blockData.section === 'resources' &&
+    parentData?.blockData.resourcesLayot === 'default'
+  )
+}
+
 const resourcesLinksFieldsArray = {
   title: {
     name: 'resourceTitle',
@@ -24,6 +31,19 @@ const resourcesLinksFieldsArray = {
 }
 
 export const resourcesFields = {
+  resourcesLayot: {
+    name: 'resourcesLayot',
+    type: 'select',
+    defaultValue: 'default',
+    label: 'Resources Layout',
+    options: [
+      { label: 'Default', value: 'default' },
+      { label: 'Wrapped', value: 'wrapped' },
+    ],
+    admin: {
+      condition: checkSelectedSection('resources'),
+    },
+  },
   resourceTitle: {
     name: 'resourceTitle',
     type: 'richText',
@@ -38,7 +58,7 @@ export const resourcesFields = {
       },
     }),
     admin: {
-      condition: checkSelectedSection('resources'),
+      condition: showOnDefault,
     },
   },
   resourcesLinks: {

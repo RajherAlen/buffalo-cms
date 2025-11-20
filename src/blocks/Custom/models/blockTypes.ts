@@ -15,6 +15,7 @@ export const blockOptions = [
   { label: 'Planning Process', value: 'planning-process' },
   { label: 'Faq', value: 'faq' },
   { label: 'Iframe', value: 'iframe' },
+  { label: 'Cemetery Locations', value: 'cemetery-locations' },
 ] as const
 
 // Literal type for section values
