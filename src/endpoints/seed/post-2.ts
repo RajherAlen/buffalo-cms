@@ -4,12 +4,12 @@ import type { PostArgs } from './post-1'
 export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> = ({
   heroImage,
   blockImage,
-  author,
+  publisher,
 }) => {
   return {
     slug: 'global-gaze',
     _status: 'published',
-    authors: [author],
+    publisher: publisher || 'Tech Daily',
     content: {
       root: {
         type: 'root',
