@@ -1,55 +1,40 @@
-import RichText from "@/components/RichText";
-import { buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
-import React from "react";
+import RichText from '@/components/RichText'
+import { buttonVariants } from '@/components/ui/button'
+import Image from 'next/image'
+import React from 'react'
 
 type ContactLink = {
-    linkTitle: string;
-    linkUrl: string;
+    linkTitle: string
+    linkUrl: string
     linkVariant: 'outline' | 'default'
-};
+}
 
 type ContactBlockProps = {
     contactTitle?: any
-    contactDescription?: string;
-    contactLinks?: ContactLink[];
-};
+    contactDescription?: string
+    contactLinks?: ContactLink[]
+}
 
 const ContactBlock: React.FC<ContactBlockProps> = ({
     contactTitle,
     contactDescription,
     contactLinks = [],
 }) => {
-    if (!contactTitle && !contactDescription && contactLinks.length === 0)
-        return null;
-
+    if (!contactTitle && !contactDescription && contactLinks.length === 0) return null
 
     return (
         <section className="py-12 px-6 max-w-[746px] mx-auto text-center">
             <div className="hidden lg:block absolute left-0 h-[520px] z-[-1]">
-                <Image
-                    src="/img/left-flower.png"
-                    alt="Flowers"
-                    width={411}
-                    height={628}
-
-                />
+                <Image src="/img/left-flower.png" alt="Flowers" width={411} height={628} />
             </div>
             <div className="hidden lg:block absolute right-0 h-[520px] z-[-1]">
-                <Image
-                    src="/img/right-flower.png"
-                    alt="Flowers"
-                    width={411}
-                    height={628}
-                />
+                <Image src="/img/right-flower.png" alt="Flowers" width={411} height={628} />
             </div>
             {contactTitle && (
-                <RichText data={contactTitle} className='!text-4xl font-faustina mb-6 lg:mb-16' />
+                <RichText data={contactTitle} className="!text-4xl font-faustina mb-6 lg:mb-16" />
             )}
 
-            {contactDescription && (
-                <p className="text-gray-700 text-lg mb-6">{contactDescription}</p>
-            )}
+            {contactDescription && <p className="text-gray-700 text-lg mb-6">{contactDescription}</p>}
 
             {contactLinks.length > 0 && (
                 <ul className="flex justify-center gap-3">
@@ -58,11 +43,9 @@ const ContactBlock: React.FC<ContactBlockProps> = ({
                             <li key={i}>
                                 <a
                                     href={link.linkUrl}
-                                    target="_blank"
                                     rel="noopener noreferrer"
                                     className={buttonVariants({
                                         variant: link.linkVariant,
-
                                     })}
                                 >
                                     {link.linkTitle}
@@ -73,7 +56,7 @@ const ContactBlock: React.FC<ContactBlockProps> = ({
                 </ul>
             )}
         </section>
-    );
-};
+    )
+}
 
-export default ContactBlock;
+export default ContactBlock

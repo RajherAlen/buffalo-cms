@@ -9,11 +9,11 @@ export type NavItem = {
   url?: string | null
   hasDropdown?: boolean | null // accept null from CMS
   dropdownItems?:
-    | {
-        label: string
-        url?: string | null
-      }[]
-    | null
+  | {
+    label: string
+    url?: string | null
+  }[]
+  | null
 }
 
 // ---------------- NavLink ----------------
@@ -21,14 +21,16 @@ const NavLink = ({
   href,
   children,
   onClick,
+  isDropdown
 }: {
   href: string
   children: React.ReactNode
   onClick?: () => void
+  isDropdown?: boolean
 }) => (
   <Link
     href={href}
-    className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+    className={isDropdown ? "relative text-sm text-brand-30 inline-block hover:bg-gold w-full px-3 py-2 rounded-md transition-colors duration-200" : "relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 hover:after:w-full"}
     onClick={onClick}
   >
     {children}
@@ -53,7 +55,7 @@ const Dropdown = ({ item, isOpen, toggle, closeDropdown }: DropdownProps) => {
     <div className="relative">
       <button
         onClick={toggle}
-        className="flex items-center gap-1 hover:text-black focus:outline-none"
+        className="flex items-center gap-1 hover:text-black focus:outline-none text-nowrap"
       >
         {item.label}
         <svg
@@ -68,13 +70,13 @@ const Dropdown = ({ item, isOpen, toggle, closeDropdown }: DropdownProps) => {
       </button>
 
       <div
-        className={`absolute left-0 top-full mt-2 w-48 bg-white shadow-lg rounded-md z-50 origin-top transition-all duration-300 ease-out transform
+        className={`absolute left-0 top-full mt-2 w-48 bg-background border border-secondary shadow-lg rounded-md z-50 origin-top transition-all duration-300 ease-out transform
         ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
       >
         <ul className="p-1">
           {item.dropdownItems.map((child, idx) => (
-            <li key={idx} className="px-2 py-1">
-              <NavLink href={child.url ?? '#'} onClick={closeDropdown}>
+            <li key={idx} className="p-1">
+              <NavLink href={child.url ?? '#'} onClick={closeDropdown} isDropdown>
                 {child.label}
               </NavLink>
             </li>

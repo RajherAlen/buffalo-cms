@@ -26,6 +26,7 @@ export const IframeBlock: React.FC<Iframe> = ({ iframeUrl, iframeTitle, iframeWi
                             height={iframeHeight || '315'}
                             className="absolute top-0 left-0 w-full h-full"
                             allowFullScreen
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"
                             title={iframeTitle}
                         ></iframe>
                     </div>

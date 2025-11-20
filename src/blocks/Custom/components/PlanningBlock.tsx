@@ -29,7 +29,7 @@ export const PlanningBlock: React.FC<PlanningBlockProps> = ({
 }) => {
     return (
         <section>
-            <div className={cn("mx-auto space-y-8", planningCards[0]?.badges ? 'max-w-[1320px]' : 'max-w-[1128px]')}>
+            <div className={cn("mx-auto space-y-8", planningCards[0]?.badges && planningCards[0]?.badges?.length > 0 ? 'max-w-[1320px]' : 'max-w-[1128px]')}>
                 <div className="grid grid-cols-1 md:grid-cols-2 mb-10 gap-5">
                     {planningTitle && (
                         <RichText
