@@ -1,6 +1,16 @@
-export async function getNews() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=3&sort=-date`)
-  const data = await res.json()
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
-  return data.docs || []
+export async function getNews() {
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'posts',
+    limit: 3,
+    sort: '-date',
+    pagination: false,
+    depth: 1,
+  })
+
+  return result.docs || []
 }

@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    cemeteries: Cemetery;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +95,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    cemeteries: CemeteriesSelect<false> | CemeteriesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1171,6 +1173,24 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cemeteries".
+ */
+export interface Cemetery {
+  id: number;
+  name: string;
+  detailsLink: string;
+  address: string;
+  workingHours?: {
+    weekday?: string | null;
+    weekend?: string | null;
+  };
+  phone?: string | null;
+  image?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1378,6 +1398,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'cemeteries';
+        value: number | Cemetery;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1917,6 +1941,25 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cemeteries_select".
+ */
+export interface CemeteriesSelect<T extends boolean = true> {
+  name?: T;
+  detailsLink?: T;
+  address?: T;
+  workingHours?:
+    | T
+    | {
+        weekday?: T;
+        weekend?: T;
+      };
+  phone?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
