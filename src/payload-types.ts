@@ -771,6 +771,7 @@ export interface CustomBlock {
     | 'faq'
     | 'grief-support'
     | 'iframe'
+    | 'image-galleries'
     | 'news'
     | 'planning'
     | 'planning-process'
@@ -959,6 +960,7 @@ export interface CustomBlock {
     };
     [k: string]: unknown;
   } | null;
+  promoLayot?: ('promo-a' | 'promo-b') | null;
   griefSubtitle?: string | null;
   supportCards?:
     | {
@@ -983,6 +985,7 @@ export interface CustomBlock {
         id?: string | null;
       }[]
     | null;
+  promoImage?: (number | null) | Media;
   badgeText?: string | null;
   guideTitle?: {
     root: {
@@ -1130,15 +1133,9 @@ export interface CustomBlock {
   iframeWidth?: string | null;
   iframeHeight?: string | null;
   cemeteryLayout?: ('list' | 'preview') | null;
-  cemeteries?:
+  imageGalleries?:
     | {
-        cemeteryTitle: string;
-        cemeteryAddress: string;
-        cemeteryPhone?: string | null;
-        hoursWeekdays?: string | null;
-        hoursSaturday?: string | null;
-        detailsLink?: string | null;
-        image?: (number | null) | Media;
+        image: number | Media;
         id?: string | null;
       }[]
     | null;
@@ -1689,6 +1686,7 @@ export interface CustomBlockSelect {
         id?: boolean;
       };
   griefTitle?: boolean;
+  promoLayot?: boolean;
   griefSubtitle?: boolean;
   supportCards?:
     | boolean
@@ -1699,6 +1697,7 @@ export interface CustomBlockSelect {
         supportLink?: boolean;
         id?: boolean;
       };
+  promoImage?: boolean;
   badgeText?: boolean;
   guideTitle?: boolean;
   guideDescription?: boolean;
@@ -1759,15 +1758,9 @@ export interface CustomBlockSelect {
   iframeWidth?: boolean;
   iframeHeight?: boolean;
   cemeteryLayout?: boolean;
-  cemeteries?:
+  imageGalleries?:
     | boolean
     | {
-        cemeteryTitle?: boolean;
-        cemeteryAddress?: boolean;
-        cemeteryPhone?: boolean;
-        hoursWeekdays?: boolean;
-        hoursSaturday?: boolean;
-        detailsLink?: boolean;
         image?: boolean;
         id?: boolean;
       };

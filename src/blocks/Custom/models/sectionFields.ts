@@ -45,6 +45,10 @@ export const sectionFields: Field = {
       value: 'iframe',
     },
     {
+      label: 'Image Galleries',
+      value: 'image-galleries',
+    },
+    {
       label: 'News',
       value: 'news',
     },
