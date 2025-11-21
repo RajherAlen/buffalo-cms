@@ -8,12 +8,29 @@ import {
 
 const isGuideSection = checkSelectedSection('guidance-and-comfort')
 
+const isPromoB = (_data: any, _siblingData: any, parentData: any) => {
+  return (
+    parentData?.blockData.section === 'guidance-and-comfort' &&
+    parentData?.blockData.promoLayot === 'promo-b'
+  )
+}
+
 export const guidanceAndComfortFields = {
   guideBadgeText: {
     name: 'badgeText',
     type: 'text',
     required: false,
     admin: { condition: isGuideSection },
+  },
+  promoLayot: {
+    name: 'promoLayot',
+    type: 'select',
+    label: 'Promo Layout',
+    defaultValue: 'promo-a',
+    options: [
+      { label: 'Promo A', value: 'promo-a' },
+      { label: 'Promo B', value: 'promo-b' },
+    ],
   },
   guideTitle: {
     name: 'guideTitle',
@@ -35,5 +52,13 @@ export const guidanceAndComfortFields = {
     type: 'text',
     required: false,
     admin: { condition: isGuideSection },
+  },
+  promoImage: {
+    name: 'promoImage',
+    label: 'Promo Image',
+    type: 'upload',
+    relationTo: 'media',
+    required: false,
+    admin: { condition: isPromoB },
   },
 }

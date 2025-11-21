@@ -26,7 +26,7 @@ const StatsBlock = ({ statsColumn, statsTitle, statsDescription, badges }: Stats
 
     return (
 
-        <div className="max-w-[1128px] mx-auto space-y-8 py-10 lg:py-16">
+        <div className="max-w-[1128px] mx-auto space-y-8">
             <div className={cn('flex flex-col lg:flex-row', statsDescription ? 'justify-between' : 'justify-center')}>
                 {statsTitle && <RichText data={statsTitle} className='text-left !text-5xl font-faustina mb-14 md:mb-0' />}
                 <p className='max-w-[460px]'>{statsDescription}</p>

@@ -10,7 +10,7 @@ export default function ImageGalleryBlock({ imageGalleries }: { imageGalleries?:
     if (!imageGalleries || imageGalleries.length === 0) return null
 
     return (
-        <div className="max-w-[1320px] mx-auto relative py-16">
+        <div className="max-w-[1320px] mx-auto relative">
             <ImageSwiper items={imageGalleries} />
         </div>
     )

@@ -960,7 +960,6 @@ export interface CustomBlock {
     };
     [k: string]: unknown;
   } | null;
-  promoLayot?: ('promo-a' | 'promo-b') | null;
   griefSubtitle?: string | null;
   supportCards?:
     | {
@@ -985,8 +984,8 @@ export interface CustomBlock {
         id?: string | null;
       }[]
     | null;
-  promoImage?: (number | null) | Media;
   badgeText?: string | null;
+  promoLayot?: ('promo-a' | 'promo-b') | null;
   guideTitle?: {
     root: {
       type: string;
@@ -1003,6 +1002,7 @@ export interface CustomBlock {
     [k: string]: unknown;
   } | null;
   guideDescription?: string | null;
+  promoImage?: (number | null) | Media;
   resourcesLayot?: ('default' | 'wrapped') | null;
   resourceTitle?: {
     root: {
@@ -1686,7 +1686,6 @@ export interface CustomBlockSelect {
         id?: boolean;
       };
   griefTitle?: boolean;
-  promoLayot?: boolean;
   griefSubtitle?: boolean;
   supportCards?:
     | boolean
@@ -1697,10 +1696,11 @@ export interface CustomBlockSelect {
         supportLink?: boolean;
         id?: boolean;
       };
-  promoImage?: boolean;
   badgeText?: boolean;
+  promoLayot?: boolean;
   guideTitle?: boolean;
   guideDescription?: boolean;
+  promoImage?: boolean;
   resourcesLayot?: boolean;
   resourceTitle?: boolean;
   resourcesLinks?:

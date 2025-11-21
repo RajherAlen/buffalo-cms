@@ -38,7 +38,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className="container my-8 xl:my-16" key={index}>
+                <div className="container my-8 xl:my-16 py-8" key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} pageSlug={pageSlug} disableInnerContainer />
                 </div>
