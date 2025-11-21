@@ -6,7 +6,7 @@ export default async function NewsBlock() {
     const news = await getNews()
 
     return (
-        <section className="bg-cream py-16">
+        <section className="bg-cream">
             <div className="max-w-[1128px] mx-auto px-6">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-3xl font-serif italic">News & Announcements</h2>
