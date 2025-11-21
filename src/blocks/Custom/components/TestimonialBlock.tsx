@@ -8,7 +8,7 @@ type TestimonialBlockProps = {
 
 const TestimonialBlock = ({ testimonialText, testimonialAuthor, testimonialPlace }: TestimonialBlockProps) => {
     return (
-        <div className='flex flex-col items-center gap-10 lg:gap-20 text-center py-16'>
+        <div className='flex flex-col items-center gap-10 lg:gap-20 text-center'>
             <QuoteSvg />
 
             <p className='font-faustina-italic text-[44px] leading-[52px]'>{testimonialText}</p>

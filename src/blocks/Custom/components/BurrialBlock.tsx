@@ -38,7 +38,7 @@ interface BurialBlockProps {
 const BurialBlock: React.FC<BurialBlockProps> = ({ sectionTitle, image, burialOptions, burialLayout, burialDescription }) => {
     if (burialLayout === 'horizontal') {
         return (
-            <div className="p-3 pl-5 bg-secondary border border-primary-dark rounded-lg my-10">
+            <div className="p-3 pl-5 bg-secondary border border-primary-dark rounded-lg">
                 <div className='flex flex-col justify-between gap-5'>
                     <div className="flex justify-between items-end flex-1 mb-28">
                         {sectionTitle && <RichText data={sectionTitle} className='text-left !text-5xl font-faustina mb-14 md:mb-0' />}

@@ -37,7 +37,7 @@ export const BenefitBlock: React.FC<PlanningBlockProps> = ({
   }
 
   return (
-    <section className="max-w-[1125px] mx-auto py-16">
+    <section className="max-w-[1125px] mx-auto">
       <div className="flex flex-wrap justify-between gap-10">
         <div className="max-w-[457px] flex flex-col justify-between">
           {benefitTitle && (

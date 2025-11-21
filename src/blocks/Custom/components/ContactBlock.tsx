@@ -23,7 +23,7 @@ const ContactBlock: React.FC<ContactBlockProps> = ({
     if (!contactTitle && !contactDescription && contactLinks.length === 0) return null
 
     return (
-        <section className="py-12 px-6 max-w-[746px] mx-auto text-center">
+        <section className="max-w-[746px] mx-auto text-center">
             <div className="hidden lg:block absolute left-0 h-[520px] z-[-1]">
                 <Image src="/img/left-flower.png" alt="Flowers" width={411} height={628} />
             </div>
