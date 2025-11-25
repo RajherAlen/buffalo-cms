@@ -31,6 +31,7 @@ export const guidanceAndComfortFields = {
       { label: 'Promo A', value: 'promo-a' },
       { label: 'Promo B', value: 'promo-b' },
     ],
+    admin: { condition: isGuideSection },
   },
   guideTitle: {
     name: 'guideTitle',

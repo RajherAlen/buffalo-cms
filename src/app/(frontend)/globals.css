@@ -122,6 +122,10 @@
   }
 }
 
+.swiper-pagination-bullet {
+  @apply !transition-all duration-200;
+}
+
 .swiper-pagination-bullet-active {
   @apply !w-11 transition-all duration-200;
 }
