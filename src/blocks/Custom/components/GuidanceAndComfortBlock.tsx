@@ -96,7 +96,7 @@ const GuidanceAndComfortBlock = ({
 
             <div className='flex justify-between flex-wrap items-end  gap-8 z-10'>
                 {guideDescription && (
-                    <p className="max-w-[640px] lg:mx-auto text-base md:text-xl">
+                    <p className="max-w-[640px] text-base md:text-xl">
                         {guideDescription}
                     </p>
                 )}
