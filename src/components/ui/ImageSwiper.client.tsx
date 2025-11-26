@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, { useRef } from 'react'
 import Image from 'next/image'
@@ -26,11 +26,15 @@ export default function ImageSwiper({ items }: { items: Item[] }) {
     return (
         <div className="relative">
             <div className="bg-background-light border border-primary-dark p-2 rounded-lg relative">
-
                 <Swiper
                     modules={[Pagination, Navigation]}
                     navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
-                    pagination={{ clickable: true, el: paginationRef.current as unknown as string, dynamicBullets: true, dynamicMainBullets: 5 }}
+                    pagination={{
+                        clickable: true,
+                        el: paginationRef.current as unknown as string,
+                        dynamicBullets: true,
+                        dynamicMainBullets: 5,
+                    }}
                     onBeforeInit={(swiper) => {
                         // ensure navigation elements are wired (refs set)
                         // @ts-expect-error - wiring refs for Swiper navigation
@@ -44,11 +48,16 @@ export default function ImageSwiper({ items }: { items: Item[] }) {
                     className="w-full h-full"
                 >
                     {items.map((item, idx) => {
-                        const src = typeof item.image === 'object' && item.image?.url ? item.image.url : typeof item.image === 'string' ? item.image : ''
-                        const alt = item.alt ?? (typeof item.image === 'object' ? item.image?.alt ?? '' : '')
+                        const src =
+                            typeof item.image === 'object' && item.image?.url
+                                ? item.image.url
+                                : typeof item.image === 'string'
+                                    ? item.image
+                                    : ''
+                        const alt = item.alt ?? (typeof item.image === 'object' ? (item.image?.alt ?? '') : '')
 
                         return (
-                            <SwiperSlide key={idx}>
+                            <SwiperSlide key={src || `slide-${idx}`}>
                                 {src ? (
                                     <div className="relative w-full h-[590px]">
                                         <Image src={src} alt={alt || 'gallery image'} fill className="object-cover" />
@@ -60,7 +69,7 @@ export default function ImageSwiper({ items }: { items: Item[] }) {
                 </Swiper>
             </div>
 
-            <div className='flex items-center justify-center gap-4 mt-4 relative'>
+            <div className="flex items-center justify-center gap-4 mt-4 relative">
                 <Button
                     ref={prevRef}
                     aria-label="Previous"
@@ -68,12 +77,9 @@ export default function ImageSwiper({ items }: { items: Item[] }) {
                     size="sm"
                     className="swiper-custom-prev"
                 >
-                    <ArrowLeft className='w-5 h-5' />
+                    <ArrowLeft className="w-5 h-5" />
                 </Button>
-                <div
-                    ref={paginationRef}
-                    className="swiper-pagination-custom flex gap-2 !w-auto"
-                />
+                <div ref={paginationRef} className="swiper-pagination-custom flex gap-2 !w-auto" />
                 <Button
                     ref={nextRef}
                     aria-label="Next"
@@ -81,7 +87,7 @@ export default function ImageSwiper({ items }: { items: Item[] }) {
                     size="sm"
                     className="swiper-custom-next"
                 >
-                    <ArrowRight className='w-5 h-5' />
+                    <ArrowRight className="w-5 h-5" />
                 </Button>
             </div>
         </div>

@@ -42,8 +42,8 @@ const BurialOptionListBlock: React.FC<BurialOptionListBlockProps> = ({ burialOpt
                 >
                   {option.image && (
                     <Image
-                      src={option.image.url}
-                      alt={option.image.alt || option.title}
+                      src={option.image?.url}
+                      alt={option.image?.alt || option.title}
                       width={580}
                       height={450}
                       className="object-cover h-full w-full"
